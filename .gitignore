@@ -1,0 +1,11 @@
+/vendor/
+/composer.lock
+/node_modules/
+/.idea/
+/.env
+.DS_Store
+*.log
+*.cache
+.phpunit.result.cache
+.php_cs.cache
+coverage/
