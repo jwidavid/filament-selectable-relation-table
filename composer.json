@@ -1,17 +1,17 @@
 {
-  "name": "your-vendor/selectable-relation-table",
+  "name": "jwidavid/selectable-relation-table",
   "description": "Filament form field for managing many-to-many relations in a table UI",
   "type": "library",
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "YourVendor\\SelectableRelationTable\\": "src/"
+      "jwidavid\\SelectableRelationTable\\": "src/"
     }
   },
   "extra": {
     "laravel": {
       "providers": [
-        "YourVendor\\SelectableRelationTable\\SelectableRelationTableServiceProvider"
+        "jwidavid\\SelectableRelationTable\\SelectableRelationTableServiceProvider"
       ]
     }
   },
