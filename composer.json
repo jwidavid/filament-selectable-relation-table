@@ -1,5 +1,5 @@
 {
-  "name": "jwidavid/selectable-relation-table",
+  "name": "jwidavid/filament-selectable-relation-table",
   "description": "Filament form field for managing many-to-many relations in a table UI",
   "type": "library",
   "license": "MIT",
