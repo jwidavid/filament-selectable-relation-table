@@ -1,6 +1,6 @@
 <?php
 
-namespace YourVendor\SelectableRelationTable;
+namespace jwidavid\SelectableRelationTable;
 
 use Illuminate\Support\ServiceProvider;
 

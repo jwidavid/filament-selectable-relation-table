@@ -1,6 +1,6 @@
 <?php
 
-namespace YourVendor\SelectableRelationTable\Components;
+namespace jwidavid\SelectableRelationTable\Components;
 
 use Filament\Forms\Components\Field;
 use Filament\Forms\Concerns\InteractsWithForms;
