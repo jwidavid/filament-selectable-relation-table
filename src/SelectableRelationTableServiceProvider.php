@@ -4,7 +4,7 @@ namespace Jwidavid\SelectableRelationTable;
 
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
-use Jwidavid\SelectableRelationTable\Livewire\SelectableRelationRenderer;
+use Jwidavid\SelectableRelationTable\Livewire\SelectableRelationTableRenderer;
 
 class SelectableRelationTableServiceProvider extends ServiceProvider
 {
@@ -12,6 +12,6 @@ class SelectableRelationTableServiceProvider extends ServiceProvider
 	{
 		$this->loadViewsFrom(__DIR__ . '/../resources/views', 'selectable-relation-table');
 
-		Livewire::component('selectable-relation-renderer', SelectableRelationRenderer::class);
+		Livewire::component('selectable-relation-table-renderer', SelectableRelationTableRenderer::class);
 	}
 }

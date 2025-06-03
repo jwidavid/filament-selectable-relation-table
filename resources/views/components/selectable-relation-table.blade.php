@@ -7,7 +7,7 @@
         :state-path="$getStatePath()"
         :is-required="$isRequired()"
 >
-    <livewire:selectable-relation-renderer
+    <livewire:selectable-relation-table-renderer
             :model-class="$getModelClass()"
             :relationship="$getRelationship()"
             :parent-record="$getParentRecord()"
