@@ -11,7 +11,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "jwidavid\\SelectableRelationTable\\SelectableRelationTableServiceProvider"
+        "Jwidavid\\SelectableRelationTable\\SelectableRelationTableServiceProvider"
       ]
     }
   },
