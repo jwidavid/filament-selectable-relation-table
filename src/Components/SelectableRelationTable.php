@@ -1,37 +1,26 @@
 <?php
 
-namespace jwidavid\SelectableRelationTable\Components;
+namespace Jwidavid\SelectableRelationTable\Components;
 
 use Filament\Forms\Components\Field;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
-use Filament\Tables\Columns\CheckboxColumn;
-use Filament\Tables\Columns\ImageColumn;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Concerns\InteractsWithTable;
-use Filament\Tables\Contracts\HasTable;
-use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
 
-class SelectableRelationTable extends Field implements HasTable, HasForms
+class SelectableRelationTable extends Field
 {
-	use InteractsWithForms;
-	use InteractsWithTable;
-
 	protected string $view = 'selectable-relation-table::components.selectable-relation-table';
 
-	public string $modelClass;
-	public string $relationship;
-	public mixed $parentRecord;
+	// Custom properties
+	protected string|\Closure|null $modelClass = null;
+	protected string|\Closure|null $relationship = null;
+	protected mixed $parentRecord = null;
 
-	public function modelClass(string $modelClass): static
+	public function modelClass(string|\Closure $modelClass): static
 	{
 		$this->modelClass = $modelClass;
 
 		return $this;
 	}
 
-	public function relationship(string $relationship): static
+	public function relationship(string|\Closure $relationship): static
 	{
 		$this->relationship = $relationship;
 
@@ -45,43 +34,18 @@ class SelectableRelationTable extends Field implements HasTable, HasForms
 		return $this;
 	}
 
-	public function getTableQuery(): Builder
+	public function getModelClass(): string
 	{
-		/** @var \Illuminate\Database\Eloquent\Model $model */
-		$model = $this->modelClass;
-
-		return $model::query();
+		return is_callable($this->modelClass) ? call_user_func($this->modelClass) : $this->modelClass;
 	}
 
-	public function table(Table $table): Table
+	public function getRelationship(): string
 	{
-		return $table
-			->columns([
-				CheckboxColumn::make('attach')
-					->label('')
-					->getStateUsing(fn ($record): bool => in_array($record->id, $this->getState() ?? []))
-					->afterStateUpdated(function (bool $state, $record) {
-						$selected = $this->getState() ?? [];
+		return is_callable($this->relationship) ? call_user_func($this->relationship) : $this->relationship;
+	}
 
-						$updated = $state
-							? array_unique([...$selected, $record->id])
-							: array_values(array_diff($selected, [$record->id]));
-
-						$this->state($updated);
-					}),
-
-				ImageColumn::make('thumbnail')
-					->label('Image')
-					->circular()
-					->getStateUsing(fn ($record) => method_exists($record, 'getFirstMediaUrl')
-						? $record->getFirstMediaUrl('thumbnail')
-						: null),
-
-				TextColumn::make('name')
-					->sortable()
-					->searchable(),
-			])
-			->paginated()
-			->searchable();
+	public function getParentRecord(): mixed
+	{
+		return is_callable($this->parentRecord) ? call_user_func($this->parentRecord) : $this->parentRecord;
 	}
 }
